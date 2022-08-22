@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-function HCF_or_LCM() {
-  const [num1, setNum1] = useState("8");
-  const [num2, setNum2] = useState("2");
+function HcfLcm() {
+  const [num1, setNum1] = useState("");
+  const [num2, setNum2] = useState("");
   const [result, setResult] = useState("");
 
   // check Number sign & validate
@@ -42,28 +42,16 @@ function HCF_or_LCM() {
       }
     }
     const HCF = Math.max(...arr);
-    // const mutliperN1 =
-    //   HCF > num1 / HCF
-    //     ? HCF + " X " + num1 / HCF + " = " + num1
-    //     : num1 / HCF + " X " + HCF + " = " + num1;
-    // const mutliperN2 =
-    //   HCF > num2 / HCF
-    //     ? HCF + " X " + num2 / HCF + " = " + num2
-    //     : num2 / HCF + " X " + HCF + " = " + num2;
-    const mutliperN1 = HCF + " X " + num1 / HCF + " = " + num1;
-    const mutliperN2 = HCF + " X " + num2 / HCF + " = " + num2;
-    console.log(mutliperN1);
-    console.log(mutliperN2);
     // setResult(JSON.stringify(arr))
     setResult(
       <div>
         <span className="font-bold">HCF</span> of {num1} & {num2} ={" "}
         <span className="font-bold">{HCF}</span>
         <div>
-          <span className={HCF ? "font-semibold" : ""}>{mutliperN1}</span>
+          {num1} X {num1 / HCF} = <span className="font-semibold">{HCF}</span>
         </div>
         <div>
-          <span className={HCF ? "font-semibold" : ""}>{mutliperN2}</span>
+          {num2} X {num2 / HCF} = <span className="font-semibold">{HCF}</span>
         </div>
       </div>
     );
@@ -89,33 +77,23 @@ function HCF_or_LCM() {
       // console.log(arr);
     }
     const LCM = Math.max(...arr);
-    const mutliperN1 =
-      LCM > num1 / LCM
-        ? num1 + " X " + LCM / num1 + " = " + LCM
-        : num1 / LCM + " X " + LCM + " = " + num1;
-    const mutliperN2 =
-      LCM > num2 / LCM
-        ? num2 + " X " + LCM / num2 + " = " + LCM
-        : num2 / LCM + " X " + LCM + " = " + num2;
-    console.log(mutliperN1);
-    // console.log(mutliperN2);
     // console.log(arr);
     setResult(
       <div>
         <span className="font-bold">LCM</span> of {num1} & {num2} ={" "}
         <span className="font-bold">{LCM}</span>
         <div>
-          <span className={LCM ? "font-semibold" : ""}>{mutliperN1}</span>
+          {num1} X {LCM / num1} = <span className="font-semibold">{LCM}</span>
         </div>
         <div>
-          <span className={LCM ? "font-semibold" : ""}>{mutliperN2}</span>
+          {num2} X {LCM / num2} = <span className="font-semibold">{LCM}</span>
         </div>
       </div>
     );
   };
 
   return (
-    <div>
+    <div className="bg-slate-300 min-h-screen max-h-fit">
       <form className="py-8 space-y-4">
         <div className="flex flex-col m-auto justify-center w-3/4">
           <label className="cursor-pointer pl-2" htmlFor="num-1">
@@ -192,4 +170,4 @@ function HCF_or_LCM() {
   );
 }
 
-export default HCF_or_LCM;
+export default HcfLcm;
