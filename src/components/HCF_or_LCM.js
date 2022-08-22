@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 
-function Main() {
-  const [num1, setNum1] = useState("");
-  const [num2, setNum2] = useState("");
+function HCF_or_LCM() {
+  const [num1, setNum1] = useState("8");
+  const [num2, setNum2] = useState("2");
   const [result, setResult] = useState("");
 
   // check Number sign & validate
   const validateNum = (value) => {
-    if (value.length < 8) {
-      if (Math.sign(value) === 1 || Math.sign(value) === 0) {
+    value = value.slice(0, 5); // No. of digit accepted is 5
+    if (value) {
+      if (Math.sign(value) === 1) {
         // console.log(value);
         return value;
       }
@@ -30,7 +31,7 @@ function Main() {
   const calculateHCF = (n1, n2, arr) => {
     n1 = Number.parseInt(n1);
     n2 = Number.parseInt(n2);
-    console.log(n1, n2);
+    // console.log(n1, n2);
     arr = [];
     for (let i = 1; i <= n1 && i <= n2; i++) {
       // console.log(i);
@@ -40,14 +41,33 @@ function Main() {
         // console.log(arr);
       }
     }
+    const HCF = Math.max(...arr);
+    // const mutliperN1 =
+    //   HCF > num1 / HCF
+    //     ? HCF + " X " + num1 / HCF + " = " + num1
+    //     : num1 / HCF + " X " + HCF + " = " + num1;
+    // const mutliperN2 =
+    //   HCF > num2 / HCF
+    //     ? HCF + " X " + num2 / HCF + " = " + num2
+    //     : num2 / HCF + " X " + HCF + " = " + num2;
+    const mutliperN1 = HCF + " X " + num1 / HCF + " = " + num1;
+    const mutliperN2 = HCF + " X " + num2 / HCF + " = " + num2;
+    console.log(mutliperN1);
+    console.log(mutliperN2);
     // setResult(JSON.stringify(arr))
     setResult(
       <div>
         <span className="font-bold">HCF</span> of {num1} & {num2} ={" "}
-        <span className="font-bold">{Math.max(...arr)}</span>
+        <span className="font-bold">{HCF}</span>
+        <div>
+          <span className={HCF ? "font-semibold" : ""}>{mutliperN1}</span>
+        </div>
+        <div>
+          <span className={HCF ? "font-semibold" : ""}>{mutliperN2}</span>
+        </div>
       </div>
     );
-    console.log(arr);
+    // console.log(arr);
     // console.count(arr)
     // return arr
   };
@@ -56,23 +76,40 @@ function Main() {
   const calculateLCM = (n1, n2, arr) => {
     n1 = Number.parseInt(n1);
     n2 = Number.parseInt(n2);
-    console.log(n1, n2);
+    // console.log(n1, n2);
     arr = [];
     let min = n1 > n2 ? n1 : n2;
     while (true) {
       if (min % n1 === 0 && min % n2 === 0) {
-        console.log(min);
+        // console.log(min);
         arr.push(min);
         break;
       }
       min++;
       // console.log(arr);
     }
-    console.log(arr);
+    const LCM = Math.max(...arr);
+    const mutliperN1 =
+      LCM > num1 / LCM
+        ? num1 + " X " + LCM / num1 + " = " + LCM
+        : num1 / LCM + " X " + LCM + " = " + num1;
+    const mutliperN2 =
+      LCM > num2 / LCM
+        ? num2 + " X " + LCM / num2 + " = " + LCM
+        : num2 / LCM + " X " + LCM + " = " + num2;
+    console.log(mutliperN1);
+    // console.log(mutliperN2);
+    // console.log(arr);
     setResult(
       <div>
         <span className="font-bold">LCM</span> of {num1} & {num2} ={" "}
-        <span className="font-bold">{Math.max(...arr)}</span>
+        <span className="font-bold">{LCM}</span>
+        <div>
+          <span className={LCM ? "font-semibold" : ""}>{mutliperN1}</span>
+        </div>
+        <div>
+          <span className={LCM ? "font-semibold" : ""}>{mutliperN2}</span>
+        </div>
       </div>
     );
   };
@@ -116,7 +153,7 @@ function Main() {
         <div className="flex flex-col pt-4 space-y-4 m-auto justify-center w-3/4">
           <button
             className={`${
-              num1 === 0 || num2.length === 0
+              num1.length === 0 || num2.length === 0
                 ? "cursor-not-allowed brightness-75"
                 : "cursor-pointer brightness-100"
             } text-white  bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-base px-5 py-2.5 text-center`}
@@ -131,7 +168,7 @@ function Main() {
           </button>
           <button
             className={`${
-              num1 === 0 || num2.length === 0
+              num1.length === 0 || num2.length === 0
                 ? "cursor-not-allowed brightness-75"
                 : "cursor-pointer brightness-100"
             } text-white  bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-base px-5 py-2.5 text-center`}
@@ -155,4 +192,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default HCF_or_LCM;

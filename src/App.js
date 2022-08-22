@@ -1,9 +1,9 @@
-import Main from "./components/Main";
+import HCF_or_LCM from "./components/HCF_or_LCM";
 
 function App() {
   return (
     <div className="bg-slate-300 min-h-screen max-h-fit">
-    <Main/>
+    <HCF_or_LCM/>
     </div>
   );
 }
