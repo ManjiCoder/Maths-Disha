@@ -45,13 +45,39 @@ function HcfLcm() {
     // setResult(JSON.stringify(arr))
     setResult(
       <div>
-        <span className="font-bold">HCF</span> of {num1} & {num2} ={" "}
-        <span className="font-bold">{HCF}</span>
-        <div>
-          {num1} X {num1 / HCF} = <span className="font-semibold">{HCF}</span>
+        <div className="text-center text-xl">
+          <span className="font-bold">HCF</span> of {num1}, {num2} ={" "}
+          <span className="font-bold">{HCF}</span>
         </div>
         <div>
-          {num2} X {num2 / HCF} = <span className="font-semibold">{HCF}</span>
+          <div className="container flex justify-around">
+            <section>
+              <div>
+                <span className="font-semibold">{HCF}</span> X {num1 / HCF} =
+                {"  "}
+                {(HCF * num1) / HCF}
+              </div>
+              <div>
+                <span className="font-semibold">{HCF}</span> X {num2 / HCF} =
+                {"  "}
+                {(HCF * num2) / HCF}
+              </div>
+            </section>
+            <section>
+              <div>or</div>
+              <div>or</div>
+            </section>
+            <section>
+              <div>
+                {num1 / HCF} X <span className="font-semibold">{HCF}</span> ={" "}
+                {(num1 / HCF) * HCF}
+              </div>
+              <div>
+                {num2 / HCF} X <span className="font-semibold">{HCF}</span> ={" "}
+                {(num2 / HCF) * HCF}
+              </div>
+            </section>
+          </div>
         </div>
       </div>
     );
@@ -80,13 +106,35 @@ function HcfLcm() {
     // console.log(arr);
     setResult(
       <div>
-        <span className="font-bold">LCM</span> of {num1} & {num2} ={" "}
-        <span className="font-bold">{LCM}</span>
-        <div>
-          {num1} X {LCM / num1} = <span className="font-semibold">{LCM}</span>
+        <div className="text-center text-xl">
+          <span className="font-bold">LCM</span> of {num1}, {num2} ={" "}
+          <span className="font-bold">{LCM}</span>
         </div>
-        <div>
-          {num2} X {LCM / num2} = <span className="font-semibold">{LCM}</span>
+        <div className="container flex justify-around">
+          <section>
+            <div>
+              {num1} X {LCM / num1} ={" "}
+              <span className="font-semibold">{LCM}</span>
+            </div>
+            <div>
+              {num2} X {LCM / num2} ={" "}
+              <span className="font-semibold">{LCM}</span>
+            </div>
+          </section>
+          <section>
+            <div>or</div>
+            <div>or</div>
+          </section>
+          <section>
+            <div>
+              {LCM / num1} X {num1} ={" "}
+              <span className="font-semibold">{LCM}</span>
+            </div>
+            <div>
+              {LCM / num2} X {num2} ={" "}
+              <span className="font-semibold">{LCM}</span>
+            </div>
+          </section>
         </div>
       </div>
     );
