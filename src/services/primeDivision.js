@@ -22,25 +22,25 @@ export const generatePrimeNum = (num) => {
 };
 
 export const calculatePrimeFactorsDivision = (num, primeArr) => {
-  const primeFactors = [];
   const steps = [];
   for (let primeNum of primeArr) {
     const isDivisible = num % primeNum === 0;
+    let reminder = num / primeNum;
     if (isDivisible) {
-      let reminder = num / primeNum;
-      primeFactors.push(primeNum);
       while (reminder !== 1) {
-        primeFactors.push(primeNum);
         steps.push({ divisor: primeNum, divident: num, reminder });
         // console.log("before", { reminder, divisor: primeNum });
         num = reminder;
         primeArr = generatePrimeNum(reminder);
         reminder = num / primeNum;
+        if (Math.floor(reminder) !== Math.ceil(reminder)) break;
         // console.log("after", { reminder, divisor: primeNum });
       }
-      steps.push({ divisor: primeNum, divident: num, reminder });
+      if (Math.floor(reminder) === Math.ceil(reminder)) {
+        steps.push({ divisor: primeNum, divident: num, reminder });
+      }
     }
   }
-  console.table(steps);
-  return primeFactors;
+  console.log(steps.map(({ divisor }) => divisor));
+  return steps;
 };

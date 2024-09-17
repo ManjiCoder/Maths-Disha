@@ -14,8 +14,8 @@ export default function PrimeDivision() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const primes = generatePrimeNum(num);
-    const primeFact = calculatePrimeFactorsDivision(parseInt(num), primes);
-    console.log(primeFact);
+    const steps = calculatePrimeFactorsDivision(parseInt(num), primes);
+    console.table(steps);
   };
   return (
     <div className="bg-slate-300 min-h-screen max-h-fit">
