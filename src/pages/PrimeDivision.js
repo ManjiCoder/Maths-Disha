@@ -16,6 +16,7 @@ export default function PrimeDivision() {
     const primes = generatePrimeNum(num);
     const steps = calculatePrimeFactorsDivision(parseInt(num), primes);
     console.table(steps);
+    console.log(primes);
   };
   return (
     <div className="bg-slate-300 min-h-screen max-h-fit">
