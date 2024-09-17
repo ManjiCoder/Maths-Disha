@@ -21,6 +21,7 @@ export const generatePrimeNum = (num) => {
 };
 
 export const calculatePrimeFactorsDivision = (num, primeArr) => {
+  const t0 = performance.now();
   const steps = [];
   for (let primeNum of primeArr) {
     const isDivisible = num % primeNum === 0;
@@ -41,5 +42,7 @@ export const calculatePrimeFactorsDivision = (num, primeArr) => {
     }
   }
   steps.divisors = steps.map(({ divisor }) => divisor);
+  const t1 = performance.now();
+  steps.time = (t1 - t0) / 1000;
   return steps;
 };

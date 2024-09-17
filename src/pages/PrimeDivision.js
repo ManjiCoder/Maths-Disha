@@ -85,6 +85,13 @@ export default function PrimeDivision() {
                 </div>
               )}
             </div>
+            <div>
+              {steps.length !== 0 && (
+                <div className="font-light pt-5 text-xs text-right">
+                  <span>{parseFloat(steps.time).toFixed(4)}</span> sec
+                </div>
+              )}
+            </div>
           </section>
         </div>
       </form>
