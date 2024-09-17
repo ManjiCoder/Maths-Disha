@@ -9,7 +9,9 @@ export default function PrimeDivision() {
   const [steps, setSteps] = useState([]);
 
   const handleOnChangeNum = (e) => {
-    setNum(e.target.value);
+    if (e.target.value.length < 6) {
+      setNum(e.target.value);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -51,15 +53,28 @@ export default function PrimeDivision() {
             Prime Division {num}
           </button>
           <section>
-            {steps.map(({ divisor, divident, reminder }) => (
-              <div
-                key={divisor + reminder}
-                className="grid grid-cols-2 min-w-[8rem] w-32 mx-auto text-lg font-semibold"
-              >
-                <span className="px-2 border border-black">{divisor}</span>
-                <span className="px-2 border border-black">{divident}</span>
-              </div>
-            ))}
+            {steps.length !== 0 &&
+              steps.map(({ divisor, divident, reminder }, i) => (
+                <div
+                  key={divisor + reminder}
+                  className="grid grid-cols-2 min-w-[8rem] text-center w-32 mx-auto text-lg font-semibold"
+                >
+                  <span
+                    className={`${i === 0 && "border-t-0"} ${
+                      i === steps.length - 1 && "border-b-0"
+                    }  px-2 border border-l-0 border-black font-bold italic`}
+                  >
+                    {divisor}
+                  </span>
+                  <span
+                    className={`${i === 0 && "border-t-0"} ${
+                      i === steps.length - 1 && "border-b-0"
+                    }  px-2 border border-r-0 border-black`}
+                  >
+                    {divident}
+                  </span>
+                </div>
+              ))}
             <div>
               {steps.length !== 0 &&
                 JSON.stringify(steps.map((divisor) => divisor))}
