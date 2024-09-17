@@ -3,7 +3,7 @@ export const generatePrimeNum = (num) => {
   if (num === 2) {
     primes.add(2);
   } else if (num < 2) {
-    alert("Now allowed!");
+    alert(num + "Now allowed!");
   } else {
     primes.add(2);
   }
@@ -23,16 +23,24 @@ export const generatePrimeNum = (num) => {
 
 export const calculatePrimeFactorsDivision = (num, primeArr) => {
   const primeFactors = [];
-  // function recersiveDivide(num, primeArr) {
+  const steps = [];
   for (let primeNum of primeArr) {
     const isDivisible = num % primeNum === 0;
     if (isDivisible) {
-      const reminder = num / primeNum;
+      let reminder = num / primeNum;
       primeFactors.push(primeNum);
-      if (reminder === 1) return;
-      calculatePrimeFactorsDivision(reminder, generatePrimeNum(reminder));
+      while (reminder !== 1) {
+        primeFactors.push(primeNum);
+        steps.push({ divisor: primeNum, divident: num, reminder });
+        // console.log("before", { reminder, divisor: primeNum });
+        num = reminder;
+        primeArr = generatePrimeNum(reminder);
+        reminder = num / primeNum;
+        // console.log("after", { reminder, divisor: primeNum });
+      }
+      steps.push({ divisor: primeNum, divident: num, reminder });
     }
   }
-  // }
+  console.table(steps);
   return primeFactors;
 };

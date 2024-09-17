@@ -14,7 +14,7 @@ export default function PrimeDivision() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const primes = generatePrimeNum(num);
-    const primeFact = calculatePrimeFactorsDivision(num, primes);
+    const primeFact = calculatePrimeFactorsDivision(parseInt(num), primes);
     console.log(primeFact);
   };
   return (
