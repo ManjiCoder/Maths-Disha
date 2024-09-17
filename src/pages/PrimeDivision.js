@@ -62,7 +62,7 @@ export default function PrimeDivision() {
                   <span
                     className={`${i === 0 && "border-t-0"} ${
                       i === steps.length - 1 && "border-b-0"
-                    }  px-2 border border-l-0 border-black font-bold italic`}
+                    }  px-2 border border-l-0 text-blue-700 border-black font-bold italic`}
                   >
                     {divisor}
                   </span>
@@ -78,7 +78,7 @@ export default function PrimeDivision() {
             <div>
               {steps.length !== 0 && (
                 <div className="font-semibold pt-5 text-lg text-center">
-                  <span>
+                  <span className="text-blue-700">
                     {steps.divisors.toString().replaceAll(",", " x ")}
                   </span>
                   <span> = {steps.divisors.reduce((x, y) => x * y)}</span>
