@@ -1,10 +1,17 @@
 import React, { useState } from "react";
+import { generatePrimeNum } from "../services/primeDivision";
 
 export default function PrimeDivision() {
   const [num, setNum] = useState("");
 
   const handleOnChangeNum = (e) => {
     setNum(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const primes = generatePrimeNum(num);
+    console.log(primes);
   };
   return (
     <div className="bg-slate-300 min-h-screen max-h-fit">
@@ -33,10 +40,7 @@ export default function PrimeDivision() {
             } text-white  bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-base px-5 py-2.5 text-center`}
             type="submit"
             disabled={num.length === 0}
-            onClick={(e) => {
-              e.preventDefault();
-              // checkDivisibility(num);
-            }}
+            onClick={handleSubmit}
           >
             Prime Division {num}
           </button>
