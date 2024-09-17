@@ -20,3 +20,19 @@ export const generatePrimeNum = (num) => {
 
   return Array.from(primes);
 };
+
+export const calculatePrimeFactorsDivision = (num, primeArr) => {
+  const primeFactors = [];
+  // function recersiveDivide(num, primeArr) {
+  for (let primeNum of primeArr) {
+    const isDivisible = num % primeNum === 0;
+    if (isDivisible) {
+      const reminder = num / primeNum;
+      primeFactors.push(primeNum);
+      if (reminder === 1) return;
+      calculatePrimeFactorsDivision(reminder, generatePrimeNum(reminder));
+    }
+  }
+  // }
+  return primeFactors;
+};
