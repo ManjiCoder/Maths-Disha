@@ -52,7 +52,7 @@ export default function PrimeDivision() {
           >
             Prime Division {num}
           </button>
-          <section>
+          <section className="flex flex-col pt-10">
             {steps.length !== 0 &&
               steps.map(({ divisor, divident, reminder }, i) => (
                 <div
@@ -76,8 +76,14 @@ export default function PrimeDivision() {
                 </div>
               ))}
             <div>
-              {steps.length !== 0 &&
-                JSON.stringify(steps.map((divisor) => divisor))}
+              {steps.length !== 0 && (
+                <div className="font-semibold pt-10 text-lg text-center">
+                  <span>
+                    {steps.divisors.toString().replaceAll(",", " x ")}
+                  </span>
+                  <span> = {steps.divisors.reduce((x, y) => x * y)}</span>
+                </div>
+              )}
             </div>
           </section>
         </div>

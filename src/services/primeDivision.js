@@ -40,6 +40,6 @@ export const calculatePrimeFactorsDivision = (num, primeArr) => {
       }
     }
   }
-  console.log(steps.map(({ divisor }) => divisor));
+  steps.divisors = steps.map(({ divisor }) => divisor);
   return steps;
 };
