@@ -6,6 +6,7 @@ import {
 
 export default function PrimeDivision() {
   const [num, setNum] = useState("");
+  const [steps, setSteps] = useState([]);
 
   const handleOnChangeNum = (e) => {
     setNum(e.target.value);
@@ -16,7 +17,7 @@ export default function PrimeDivision() {
     const primes = generatePrimeNum(num);
     const steps = calculatePrimeFactorsDivision(parseInt(num), primes);
     console.table(steps);
-    console.log(primes);
+    setSteps(steps);
   };
   return (
     <div className="bg-slate-300 min-h-screen max-h-fit">
@@ -49,17 +50,21 @@ export default function PrimeDivision() {
           >
             Prime Division {num}
           </button>
-
-          {/* {(test2 || test3 || test4 || test5 || test9 || test10) && (
-          <div className="bg-slate-100 py-2 pl-2 rounded-md">
-            <div className="">{test2}</div>
-            <div className="">{test3}</div>
-            <div className="">{test4}</div>
-            <div className="">{test5}</div>
-            <div className="">{test9}</div>
-            <div className="">{test10}</div>
-          </div>
-        )} */}
+          <section>
+            {steps.map(({ divisor, divident, reminder }) => (
+              <div
+                key={divisor + reminder}
+                className="grid grid-cols-2 min-w-[8rem] w-32 mx-auto text-lg font-semibold"
+              >
+                <span className="px-2 border border-black">{divisor}</span>
+                <span className="px-2 border border-black">{divident}</span>
+              </div>
+            ))}
+            <div>
+              {steps.length !== 0 &&
+                JSON.stringify(steps.map((divisor) => divisor))}
+            </div>
+          </section>
         </div>
       </form>
     </div>
