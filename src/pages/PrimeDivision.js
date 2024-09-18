@@ -20,8 +20,8 @@ export default function PrimeDivision() {
     const primes = generatePrimeNum(num);
     const data = calculatePrimeFactorsDivision(parseInt(num), primes);
     data.steps.push({ divisor: null, reminder: null, divident: 1 });
-    console.table(data.steps);
-    console.log(data);
+    // console.table(data.steps);
+    // console.log(data);
     setCalculationData(data);
   };
 
@@ -54,7 +54,7 @@ export default function PrimeDivision() {
             disabled={num.length === 0}
             onClick={handleSubmit}
           >
-            Prime Division {num}
+            Prime Division {num && "of " + num}
           </button>
           <section className="flex flex-col pt-5">
             {steps &&
