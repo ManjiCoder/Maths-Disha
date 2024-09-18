@@ -239,7 +239,7 @@ function HcfLcm() {
       </form>
 
       {hcf.steps && (
-        <div className="flex justify-center gap-5">
+        <div className="flex justify-center gap-5 pb-20">
           <PrimeFactorDivision
             steps={hcf.steps}
             divisors={hcf.divisors}

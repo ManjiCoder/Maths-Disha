@@ -43,7 +43,10 @@ export const calculatePrimeFactorsDivision = (num, primeArr) => {
       }
     }
   }
-  payload.divisors = payload.steps.map(({ divisor }) => divisor);
+  payload.steps.push({ divisor: null, divident: 1, reminder: null });
+  payload.divisors = payload.steps
+    .filter(({ divisor }) => divisor)
+    .map(({ divisor }) => divisor);
   const t1 = performance.now();
   payload.time = (t1 - t0) / 1000;
   return payload;

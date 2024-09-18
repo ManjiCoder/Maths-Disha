@@ -19,7 +19,7 @@ export default function PrimeDivision() {
     e.preventDefault();
     const primes = generatePrimeNum(num);
     const data = calculatePrimeFactorsDivision(parseInt(num), primes);
-    data.steps.push({ divisor: null, reminder: null, divident: 1 });
+    // data.steps.push({ divisor: null, reminder: null, divident: 1 });
     // console.table(data.steps);
     // console.log(data);
     setCalculationData(data);
