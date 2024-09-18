@@ -1,9 +1,17 @@
 import React, { useState } from "react";
+import {
+  calculatePrimeFactorsDivision,
+  generatePrimeNum,
+} from "../services/primeDivision";
+import PrimeFactorDivision from "./PrimeFactorDivision";
 
 function HcfLcm() {
   const [num1, setNum1] = useState("");
   const [num2, setNum2] = useState("");
   const [result, setResult] = useState("");
+
+  const [hcf, setHcf] = useState([]);
+  const [lcm, setLcm] = useState([]);
 
   // check Number sign & validate
   const validateNum = (value) => {
@@ -84,6 +92,13 @@ function HcfLcm() {
     // console.log(arr);
     // console.count(arr)
     // return arr
+    const primes = generatePrimeNum(num1);
+    const data = calculatePrimeFactorsDivision(num1, primes);
+    const primes1 = generatePrimeNum(num2);
+    const data1 = calculatePrimeFactorsDivision(num2, primes1);
+    // console.log(data);
+    setHcf(data);
+    setLcm(data1);
   };
 
   // LCM
@@ -138,6 +153,14 @@ function HcfLcm() {
         </div>
       </div>
     );
+
+    const primes = generatePrimeNum(num1);
+    const data = calculatePrimeFactorsDivision(num1, primes);
+    const primes1 = generatePrimeNum(num2);
+    const data1 = calculatePrimeFactorsDivision(num2, primes1);
+    // console.log(data);
+    setHcf(data);
+    setLcm(data1);
   };
 
   return (
@@ -214,6 +237,21 @@ function HcfLcm() {
           )}
         </div>
       </form>
+
+      {hcf.steps && (
+        <div className="flex justify-center gap-5">
+          <PrimeFactorDivision
+            steps={hcf.steps}
+            divisors={hcf.divisors}
+            time={hcf.time}
+          />
+          <PrimeFactorDivision
+            steps={lcm.steps}
+            divisors={lcm.divisors}
+            time={lcm.time}
+          />
+        </div>
+      )}
     </div>
   );
 }
