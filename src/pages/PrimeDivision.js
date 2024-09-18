@@ -6,8 +6,8 @@ import {
 
 export default function PrimeDivision() {
   const [num, setNum] = useState("");
-  const [steps, setSteps] = useState([]);
-
+  const [calculationData, setCalculationData] = useState([]);
+  const { steps, divisors, time } = calculationData;
   const handleOnChangeNum = (e) => {
     if (e.target.value.length < 6) {
       setNum(e.target.value);
@@ -17,10 +17,12 @@ export default function PrimeDivision() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const primes = generatePrimeNum(num);
-    const steps = calculatePrimeFactorsDivision(parseInt(num), primes);
-    console.table(steps);
-    setSteps(steps);
+    const data = calculatePrimeFactorsDivision(parseInt(num), primes);
+    console.table(data.steps);
+    console.log(data);
+    setCalculationData(data);
   };
+
   return (
     <div className="bg-slate-300 min-h-screen max-h-fit">
       <form className="py-8 space-y-4">
@@ -53,7 +55,7 @@ export default function PrimeDivision() {
             Prime Division {num}
           </button>
           <section className="flex flex-col pt-5">
-            {steps.length !== 0 &&
+            {steps &&
               steps.map(({ divisor, divident, reminder }, i) => (
                 <div
                   key={divisor + reminder}
@@ -61,14 +63,14 @@ export default function PrimeDivision() {
                 >
                   <span
                     className={`${i === 0 && "border-t-0"} ${
-                      i === steps.length - 1 && "border-b-0"
+                      i === calculationData.length - 1 && "border-b-0"
                     }  px-2 border border-l-0 text-blue-700 border-black font-bold italic`}
                   >
                     {divisor}
                   </span>
                   <span
                     className={`${i === 0 && "border-t-0"} ${
-                      i === steps.length - 1 && "border-b-0"
+                      i === calculationData.length - 1 && "border-b-0"
                     }  px-2 border border-r-0 border-black`}
                   >
                     {divident}
@@ -76,19 +78,19 @@ export default function PrimeDivision() {
                 </div>
               ))}
             <div>
-              {steps.length !== 0 && (
+              {divisors && (
                 <div className="font-semibold pt-5 text-lg text-center">
                   <span className="text-blue-700">
-                    {steps.divisors.toString().replaceAll(",", " x ")}
+                    {divisors.toString().replaceAll(",", " x ")}
                   </span>
-                  <span> = {steps.divisors.reduce((x, y) => x * y)}</span>
+                  <span> = {divisors.reduce((x, y) => x * y)}</span>
                 </div>
               )}
             </div>
             <div>
-              {steps.length !== 0 && (
+              {time && (
                 <div className="font-light pt-5 text-xs text-right">
-                  <span>{parseFloat(steps.time).toFixed(4)}</span> sec
+                  <span>{parseFloat(time).toFixed(4)}</span> sec
                 </div>
               )}
             </div>

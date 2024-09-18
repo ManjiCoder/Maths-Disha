@@ -22,13 +22,15 @@ export const generatePrimeNum = (num) => {
 
 export const calculatePrimeFactorsDivision = (num, primeArr) => {
   const t0 = performance.now();
-  const steps = [];
+  const payload = {
+    steps: [],
+  };
   for (let primeNum of primeArr) {
     const isDivisible = num % primeNum === 0;
     let reminder = num / primeNum;
     if (isDivisible) {
       while (reminder !== 1) {
-        steps.push({ divisor: primeNum, divident: num, reminder });
+        payload.steps.push({ divisor: primeNum, divident: num, reminder });
         // console.log("before", { reminder, divisor: primeNum });
         num = reminder;
         primeArr = generatePrimeNum(reminder);
@@ -37,12 +39,12 @@ export const calculatePrimeFactorsDivision = (num, primeArr) => {
         // console.log("after", { reminder, divisor: primeNum });
       }
       if (Math.floor(reminder) === Math.ceil(reminder)) {
-        steps.push({ divisor: primeNum, divident: num, reminder });
+        payload.steps.push({ divisor: primeNum, divident: num, reminder });
       }
     }
   }
-  steps.divisors = steps.map(({ divisor }) => divisor);
+  payload.divisors = payload.steps.map(({ divisor }) => divisor);
   const t1 = performance.now();
-  steps.time = (t1 - t0) / 1000;
-  return steps;
+  payload.time = (t1 - t0) / 1000;
+  return payload;
 };
