@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { twMerge } from "tailwind-merge";
 import {
   calculatePrimeFactorsDivision,
   generatePrimeNum,
@@ -62,16 +63,20 @@ export default function PrimeDivision() {
                   className="grid grid-cols-2 min-w-[8rem] text-center w-32 mx-auto text-lg font-semibold"
                 >
                   <span
-                    className={`${i === 0 && "border-t-0"} ${
-                      i === calculationData.length - 1 && "border-b-0"
-                    }  px-2 border border-l-0 text-blue-700 border-black font-bold italic`}
+                    className={twMerge(
+                      "px-2 border border-l-0 text-blue-700 border-black font-bold italic",
+                      `${i === 0 && "border-t-0"}
+                      ${i === steps.length - 1 && "border-b-0"}`
+                    )}
                   >
                     {divisor}
                   </span>
                   <span
-                    className={`${i === 0 && "border-t-0"} ${
-                      i === calculationData.length - 1 && "border-b-0"
-                    }  px-2 border border-r-0 border-black`}
+                    className={twMerge(
+                      "px-2 border border-r-0 border-black",
+                      ` ${i === 0 && "border-t-0"}
+                       ${i === steps.length - 1 && "border-b-0"}`
+                    )}
                   >
                     {divident}
                   </span>
@@ -87,9 +92,9 @@ export default function PrimeDivision() {
                 </div>
               )}
             </div>
-            <div>
+            <div className="font-light pt-5 text-xs text-right">
               {time && (
-                <div className="font-light pt-5 text-xs text-right">
+                <div>
                   <span>{parseFloat(time).toFixed(4)}</span> sec
                 </div>
               )}
