@@ -48,6 +48,8 @@ export const calculatePrimeFactorsDivision = (num, primeArr) => {
     .filter(({ divisor }) => divisor)
     .map(({ divisor }) => divisor);
   const t1 = performance.now();
-  payload.time = (t1 - t0) / 1000;
+  const timeDiff = (t1 - t0) / 1000;
+  payload.time = timeDiff;
+  // console.log(timeDiff)
   return payload;
 };
