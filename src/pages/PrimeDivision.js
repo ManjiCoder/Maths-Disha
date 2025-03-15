@@ -21,11 +21,14 @@ export default function PrimeDivision() {
 
     const worker = new Worker('worker.js');
 
+    // sending data to worker
     worker.postMessage(parseInt(num));
 
+    // received data from worker
     worker.onmessage = (e) => {
       console.log('Worker processing done: ', e.data);
       setCalculationData(e.data);
+      worker.terminate();
     };
     // const primes = generatePrimeNum(num);
     // const data = calculatePrimeFactorsDivision(parseInt(num), primes);

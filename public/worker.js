@@ -56,8 +56,10 @@ const calculatePrimeFactorsDivision = (num) => {
   return payload;
 };
 
+// worker received data
 self.onmessage = (e) => {
   console.log('Worker received data: ', e.data);
   const data = calculatePrimeFactorsDivision(e.data);
+  //   worker send data
   self.postMessage(data);
 };
