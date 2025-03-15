@@ -1,20 +1,16 @@
-import React, { useState } from "react";
-import PrimeFactorDivision from "../components/PrimeFactorDivision";
-import {
-  calculatePrimeFactorsDivision,
-  generatePrimeNum,
-} from "../services/primeDivision";
+import React, { useState } from 'react';
+import PrimeFactorDivision from '../components/PrimeFactorDivision';
 
 export default function PrimeDivision() {
-  const [num, setNum] = useState("");
+  const [num, setNum] = useState('');
   const [calculationData, setCalculationData] = useState([]);
   const { steps, divisors, time } = calculationData;
 
   const handleOnChangeNum = (e) => {
     let { value } = e.target;
     if (value.length < 6) {
-      if (value.includes(".")) {
-        value = value.replace(".", "").replace("+e", "");
+      if (value.includes('.')) {
+        value = value.replace('.', '').replace('+e', '');
       }
       setNum(value);
     }
@@ -22,12 +18,21 @@ export default function PrimeDivision() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const primes = generatePrimeNum(num);
-    const data = calculatePrimeFactorsDivision(parseInt(num), primes);
+
+    const worker = new Worker('worker.js');
+
+    worker.postMessage(parseInt(num));
+
+    worker.onmessage = (e) => {
+      console.log('Worker processing done: ', e.data);
+      setCalculationData(e.data);
+    };
+    // const primes = generatePrimeNum(num);
+    // const data = calculatePrimeFactorsDivision(parseInt(num), primes);
     // data.steps.push({ divisor: null, reminder: null, divident: 1 });
-    console.table(data.steps);
+    // console.table(data.steps);
     // console.log(data);
-    setCalculationData(data);
+    // setCalculationData(data);
   };
 
   return (
@@ -52,14 +57,14 @@ export default function PrimeDivision() {
           <button
             className={`${
               num.length === 0
-                ? "cursor-not-allowed brightness-75"
-                : "cursor-pointer brightness-100"
+                ? 'cursor-not-allowed brightness-75'
+                : 'cursor-pointer brightness-100'
             } text-white  bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-base px-5 py-2.5 text-center`}
             type='submit'
             disabled={num.length === 0}
             onClick={handleSubmit}
           >
-            Prime Division {num && "of " + num}
+            Prime Division {num && 'of ' + num}
           </button>
           <PrimeFactorDivision steps={steps} divisors={divisors} time={time} />
         </div>
