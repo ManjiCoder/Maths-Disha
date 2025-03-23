@@ -4,6 +4,7 @@ import PrimeFactorDivision from '../components/PrimeFactorDivision';
 export default function PrimeDivision() {
   const [num, setNum] = useState('');
   const [calculationData, setCalculationData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const { steps, divisors, time } = calculationData;
 
   const handleOnChangeNum = (e) => {
@@ -17,6 +18,7 @@ export default function PrimeDivision() {
   };
 
   const handleSubmit = (e) => {
+    setIsLoading(true);
     e.preventDefault();
 
     const worker = new Worker('worker.js');
@@ -28,6 +30,7 @@ export default function PrimeDivision() {
     worker.onmessage = (e) => {
       console.log('Worker processing done: ', e.data);
       setCalculationData(e.data);
+      setIsLoading(false);
       worker.terminate();
     };
     // const primes = generatePrimeNum(num);
@@ -62,12 +65,38 @@ export default function PrimeDivision() {
               num.length === 0
                 ? 'cursor-not-allowed brightness-75'
                 : 'cursor-pointer brightness-100'
-            } text-white  bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-base px-5 py-2.5 text-center`}
+            } text-white disabled:cursor-not-allowed disabled:brightness-75 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-base px-5 py-2.5 text-center`}
             type='submit'
-            disabled={num.length === 0}
+            disabled={num.length === 0 || isLoading}
             onClick={handleSubmit}
           >
-            Prime Division {num && 'of ' + num}
+            {isLoading ? (
+              <span className='flex justify-center items-center'>
+                <svg
+                  class='-ml-1 mr-3 h-5 w-5 animate-spin text-white'
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                >
+                  <circle
+                    class='opacity-25'
+                    cx='12'
+                    cy='12'
+                    r='10'
+                    stroke='currentColor'
+                    stroke-width='4'
+                  ></circle>
+                  <path
+                    class='opacity-75'
+                    fill='currentColor'
+                    d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
+                  ></path>
+                </svg>
+                <span>Loading..</span>
+              </span>
+            ) : (
+              `Prime Division ${num && 'of ' + num}`
+            )}
           </button>
           <PrimeFactorDivision steps={steps} divisors={divisors} time={time} />
         </div>
